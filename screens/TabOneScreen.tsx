@@ -8,18 +8,18 @@ import { Text, View } from '../components/Themed';
 const TabOneScreen:React.FC = () => {
   const [trigger, setTrigger] = React.useState(false);
 
-  // React.useEffect(() => {
-  //   const getValue = firebase.database().ref("trigger");
-  //   getValue.on("value", (snapshot: any) => {
-  //     let value = snapshot.val();
-  //     typeof trigger == "boolean" && setTrigger(value);
-  //   });
-  // }, [trigger]);
+  React.useEffect(() => {
+    const getValue = firebase.database().ref("Pressure");
+    getValue.on("value", (snapshot: any) => {
+      let value = snapshot.val();
+      setTrigger(value);
+    });
+  }, [trigger]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One Is there?</Text>
-      <Text style={styles.title}>{trigger.toString()}</Text>
+      <Text style={styles.title}>{trigger}</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     </View>
   );
